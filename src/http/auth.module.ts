@@ -5,6 +5,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { LocalStrategy } from "./auth/strategies/local-strategy";
 import { JwtStrategy } from "./auth/strategies/jwt-strategy";
 import { PermissionsGuard } from "./auth/guards/permissions.guard";
+import { UserRepository } from "src/database/repositories/user.repository";
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { PermissionsGuard } from "./auth/guards/permissions.guard";
     })
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy, PermissionsGuard],
+  providers: [AuthService, LocalStrategy, JwtStrategy, PermissionsGuard, UserRepository],
 })
 
 export class AuthModule {}

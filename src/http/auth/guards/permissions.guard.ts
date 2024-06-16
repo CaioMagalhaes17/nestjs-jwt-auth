@@ -7,8 +7,8 @@ export class PermissionsGuard implements CanActivate {
   constructor(private reflector: Reflector, private jwtService: JwtService) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const validPermissions = this.reflector.get<['ADMIN'|'MANAGER']>('permissions', context.getHandler());
-    if (!validPermissions) {
+    const validPermission = this.reflector.get<'ADMIN'|'MANAGER'>('permissions', context.getHandler());
+    if (!validPermission) {
       return true;
     }
 
@@ -20,7 +20,8 @@ export class PermissionsGuard implements CanActivate {
     }
 
     const user = this.jwtService.verify(token);
-    const hasPermission = () => user.permissions.some((permission: 'ADMIN' | 'MANAGER') => validPermissions.includes(permission));
+    console.log(user.permissions, validPermission)
+    const hasPermission = () => user.permissions === validPermission;
     if (!hasPermission()) {
       throw new ForbiddenException('Access denied: insufficient permissions');
     }

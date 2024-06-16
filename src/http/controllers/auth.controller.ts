@@ -4,6 +4,8 @@ import { LocalAuthGuard } from '../auth/guards/local.guard';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { Permissions } from '../auth/decorators/permissions.decorator';
 import { PermissionsGuard } from '../auth/guards/permissions.guard';
+import { JwtPayloadDTO } from '../auth/dto/jwt-payload.dto';
+import { UserRepository } from 'src/database/repositories/user.repository';
 
 @Controller()
 export class AuthController {
@@ -11,13 +13,12 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('/login')
-  async handle(@Request() req) {
-    console.log(req.user)
+  async handle(@Request() req: {user: JwtPayloadDTO}) {
     return this.authService.generateAuthToken(req.user)
   }
 
   @UseGuards(JwtAuthGuard, PermissionsGuard)
-  @Permissions('MANAGER')
+  @Permissions('ADMIN')
   @Get('/teste')
   getTeste(){
     return '321'
