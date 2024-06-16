@@ -1,5 +1,7 @@
 export class JwtPayloadDTO {
-  id: string
+  id: number
   name: string
+  login: string
   permissions: ['ADMIN' | 'MANAGER']
+  password?: string
 }
