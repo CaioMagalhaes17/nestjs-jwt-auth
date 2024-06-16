@@ -67,7 +67,7 @@ O servidor estará disponível em `http://localhost:3000` por padrão.
   - 201 Created: Usuário criado com sucesso.
   - 400 Bad Request: Erro de validação ou usuário já existente.
 
-### Mudança de Permissões
+### Mudança de Permissões (ADMIN)
 
 - **Método:** PUT
 - **Endpoint:** `/user/permissions/:userId`
@@ -91,6 +91,10 @@ O servidor estará disponível em `http://localhost:3000` por padrão.
 - **NestJS:** Framework Node.js para construção de APIs eficientes e escaláveis.
 - **MySQL:** Banco de dados relacional utilizado para armazenamento dos dados dos usuários.
 - **JWT:** Utilizado para autenticação baseada em tokens.
+
+
+# Considerações sobre o Uso:
+  Apenas um usuário pode criar uma conta como administrador, os usuários posteriores devem ter suas permissões alteradas pelo ADMIN
 
 ## Autor
 
