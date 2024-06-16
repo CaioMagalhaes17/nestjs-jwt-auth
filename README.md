@@ -98,4 +98,8 @@ O servidor estará disponível em `http://localhost:3000` por padrão.
 
 ## Autor
 
+# Prints
+
+<img src="https://github.com/CaioMagalhaes17/nestjs-jwt-auth/tree/master/blob/main">
+
 Caio Magalhães de Faria
