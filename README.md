@@ -101,5 +101,9 @@ O servidor estará disponível em `http://localhost:3000` por padrão.
 # Prints
 
 <img src="https://github.com/CaioMagalhaes17/nestjs-jwt-auth/tree/master/blob/main/cadastro.png">
+<img src="https://github.com/CaioMagalhaes17/nestjs-jwt-auth/tree/master/blob/main/login.png">
+<img src="https://github.com/CaioMagalhaes17/nestjs-jwt-auth/tree/master/blob/main/permissions.png">
+<img src="https://github.com/CaioMagalhaes17/nestjs-jwt-auth/tree/master/blob/main/perfil.png">
+
 
 Caio Magalhães de Faria
