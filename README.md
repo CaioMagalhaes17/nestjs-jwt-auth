@@ -1,73 +1,97 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# API de Autenticação com NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Esta é uma API de autenticação desenvolvida em NestJS que utiliza MySQL como banco de dados. Siga as instruções abaixo para configurar e rodar o projeto.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Configuração do Ambiente
 
-## Description
+### Pré-requisitos
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Antes de iniciar, certifique-se de ter o Node.js e o npm instalados na sua máquina.
 
-## Installation
+### Instalação
+
+1. Clone este repositório:
 
 ```bash
-$ npm install
+  git clone https://github.com/CaioMagalhaes17/nestjs-jwt-auth
 ```
 
-## Running the app
+
+2. Instale as dependências do projeto:
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+  npm install
 ```
 
-## Test
+3. Configure o arquivo .env
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+  cp .env-example .env
 ```
 
-## Support
+5. Importe o banco de dados MySQL:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- Baixe o arquivo `banco.sql` fornecido.
+- Importe-o no seu servidor MySQL para criar o banco de dados e as tabelas necessárias.
 
-## Stay in touch
+## Executando a API
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Para rodar o servidor da API, execute o seguinte comando:
 
-## License
+```bash
+  npm run start:dev
+```
 
-Nest is [MIT licensed](LICENSE).
+
+O servidor estará disponível em `http://localhost:3000` por padrão.
+
+## Rotas da API
+
+### Login
+
+- **Método:** POST
+- **Endpoint:** `/login`
+- **Acesso:** Pública
+- **Descrição:** Autentica um usuário e retorna um token JWT.
+- **Status de Retorno:**
+  - 200 OK: Sucesso na autenticação. Retorna um token JWT no formato Bearer.
+  - 400 Bad Request: Erro na autenticação.
+
+### Cadastro de Usuário
+
+- **Método:** POST
+- **Endpoint:** `/user`
+- **Acesso:** Pública
+- **Descrição:** Cria um novo usuário na base de dados.
+- **Status de Retorno:**
+  - 201 Created: Usuário criado com sucesso.
+  - 400 Bad Request: Erro de validação ou usuário já existente.
+
+### Mudança de Permissões
+
+- **Método:** PUT
+- **Endpoint:** `/user/permissions/:userId`
+- **Acesso:** Autenticada para administradores
+- **Descrição:** Atualiza as permissões de um usuário específico.
+- **Status de Retorno:**
+  - 201 Created: Permissões atualizadas com sucesso.
+  - 400 Bad Request: Erro de validação ou permissões inválidas.
+
+### Ver Perfil do Usuário
+
+- **Método:** GET
+- **Endpoint:** `/user`
+- **Acesso:** Autenticada
+- **Descrição:** Retorna o perfil do usuário autenticado.
+- **Status de Retorno:**
+  - 200 OK: Retorna um objeto JSON com informações do usuário (id, nome, login, permissions).
+
+## Tecnologias Utilizadas
+
+- **NestJS:** Framework Node.js para construção de APIs eficientes e escaláveis.
+- **MySQL:** Banco de dados relacional utilizado para armazenamento dos dados dos usuários.
+- **JWT:** Utilizado para autenticação baseada em tokens.
+
+## Autor
+
+Caio Magalhães de Faria
