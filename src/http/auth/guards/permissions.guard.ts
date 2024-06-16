@@ -7,7 +7,7 @@ export class PermissionsGuard implements CanActivate {
   constructor(private reflector: Reflector, private jwtService: JwtService) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const validPermission = this.reflector.get<'ADMIN'|'MANAGER'>('permissions', context.getHandler());
+    const validPermission = this.reflector.get<'ADMIN'|'MANAGER'|'USUARIO'>('permissions', context.getHandler());
     if (!validPermission) {
       return true;
     }

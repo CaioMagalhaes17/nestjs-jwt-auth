@@ -29,11 +29,20 @@ export class AuthService {
   }
 
   async createUser(userData: Partial<User>){
+    let warning = ''
+    if (userData.permissions){
+      const admins = await this.userRepository.getAdmins()
+      if (admins.length > 0){
+        warning = `AVISO! Usuários novos não tem permissão para criar contas como administradores, peça para que um administrador atualize suas permissões`
+        delete userData.permissions
+      }
+    }
     const existentUser = await this.findUserByLogin(userData.login)
     if (existentUser) return null
     const createdUser = await this.userRepository.createUser(userData)
     const token = this.generateAuthToken({ login: createdUser.login, id: createdUser.id, name: createdUser.name, permissions: createdUser.permissions})
     return {
+      warning: warning,
       authToken: token,
       permissions: createdUser.permissions
     }

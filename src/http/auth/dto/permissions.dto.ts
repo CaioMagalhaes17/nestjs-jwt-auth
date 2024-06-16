@@ -1,9 +1,9 @@
 import {IsIn} from 'class-validator'
 
 export class PermissionsDTO {
-  @IsIn(['ADMIN', 'MANAGER'], {
-    message: 'Permissões válidas são ADMIN ou MANAGER',
+  @IsIn(['ADMIN', 'MANAGER', 'USUARIO'], {
+    message: 'Permissões válidas são USUARIO, ADMIN ou MANAGER',
   })
-  permissions: 'ADMIN' | 'MANAGER';
+  permissions: 'ADMIN' | 'MANAGER' | 'USUARIO';
 
 }

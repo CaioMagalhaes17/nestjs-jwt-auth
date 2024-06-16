@@ -33,4 +33,11 @@ export class UserRepository {
       return result
     }
   }
+
+  async getAdmins(){
+    const result = await User.findAll({
+      where: {permissions: 'ADMIN'}
+    })
+    return result
+  }
 }

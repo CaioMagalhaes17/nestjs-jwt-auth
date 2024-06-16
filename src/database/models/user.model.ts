@@ -22,5 +22,5 @@ export class User extends Model {
   password: string
 
   @Column
-  permissions: 'ADMIN' | 'MANAGER'
+  permissions: 'ADMIN' | 'MANAGER' | 'USUARIO'
 }
