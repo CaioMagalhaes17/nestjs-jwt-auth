@@ -1,6 +1,7 @@
 import { permission } from "process";
 import { User } from "../models/user.model";
 import { HttpException } from "@nestjs/common";
+import { PermissionsDTO } from "src/http/auth/dto/permissions.dto";
 
 export class UserRepository {
   constructor(private userModel: User){}
@@ -22,7 +23,7 @@ export class UserRepository {
     return result
   }
 
-  async changePermissions(userId: string, changePermissionData: {permissions: 'ADMIN' | 'MANAGER'}){
+  async changePermissions(userId: string, changePermissionData: PermissionsDTO){
     if (await this.getUserById(userId)) {
       const result = await User.update({permissions: changePermissionData.permissions}, {
         where: {id: userId},
