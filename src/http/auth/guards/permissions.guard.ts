@@ -20,10 +20,9 @@ export class PermissionsGuard implements CanActivate {
     }
 
     const user = this.jwtService.verify(token);
-    console.log(user.permissions, validPermission)
     const hasPermission = () => user.permissions === validPermission;
     if (!hasPermission()) {
-      throw new ForbiddenException('Access denied: insufficient permissions');
+      throw new ForbiddenException('Acesso negado: permissões insuficientes');
     }
 
     return true;
