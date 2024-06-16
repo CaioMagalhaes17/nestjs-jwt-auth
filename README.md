@@ -23,8 +23,13 @@ Antes de iniciar, certifique-se de ter o Node.js e o npm instalados na sua máqu
   npm install
 ```
 
+3. Configure o arquivo .env
 
-3. Importe o banco de dados MySQL:
+```bash
+  cp .env-example .env
+```
+
+5. Importe o banco de dados MySQL:
 
 - Baixe o arquivo `banco.sql` fornecido.
 - Importe-o no seu servidor MySQL para criar o banco de dados e as tabelas necessárias.
